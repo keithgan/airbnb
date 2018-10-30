@@ -6,6 +6,8 @@ ruby '2.5.1'
 # Gems installed
 gem "clearance"
 gem "figaro"
+gem 'omniauth-google-oauth2'
+gem 'omniauth'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.1'
