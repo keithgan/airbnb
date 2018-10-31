@@ -1,0 +1,47 @@
+<p>
+  <strong>Accommodation type:</strong>
+  <%= @listing.accommodation_type %>
+</p>
+ 
+<p>
+  <strong>Accommodation name:</strong>
+  <%= @listing.accommodation_name %>
+</p>
+
+<p>
+  <strong>Accommodation location:</strong>
+  <%= @listing.accommodation_location %>
+</p>
+ 
+<p>
+  <strong>Number of guests:</strong>
+  <%= @listing.no_of_guests %>
+</p>
+
+<p>
+  <strong>Number of bedrooms:</strong>
+  <%= @listing.no_of_bedrooms %>
+</p>
+ 
+<p>
+  <strong>Number of beds:</strong>
+  <%= @listing.no_of_beds %>
+</p>
+
+<p>
+  <strong>Number of bathrooms:</strong>
+  <%= @listing.no_of_bathrooms %>
+</p>
+ 
+<p>
+  <strong>Amenities:</strong>
+  <%= @listing.amenities %>
+</p>
+
+<p>
+  <strong>Price per night:</strong>
+  <%= @listing.price_per_night %>
+</p>
+
+<%= link_to 'Edit', edit_listing_path(@listing) %>
+<%= link_to 'Back', listings_path %>

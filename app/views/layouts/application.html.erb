@@ -8,9 +8,12 @@
   <div id="header">
     <% if signed_in? -%>
       <%= button_to t(".sign_out"), sign_out_path, method: :delete %>
+      <%= link_to t(".start_hosting"), new_listing_path %>
+
+
     <% else -%>
-      <%= link_to "Sign in with Google", "/auth/google_oauth2" %>
       <%= link_to t(".sign_in"), sign_in_path %>
+      <%= link_to "Sign in with Google", "/auth/google_oauth2" %>
     <% end -%>
   </div>
 

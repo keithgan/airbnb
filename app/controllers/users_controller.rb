@@ -1,5 +1,14 @@
 class UsersController < Clearance::UsersController
 
+    def profile
+      #do somethin
+      @user = current_user
+      # @listings = @user.listings
+
+      # automatically renders a profile.html.erb
+      
+    end
+
     private
 
     def user_from_params

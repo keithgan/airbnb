@@ -1,0 +1,65 @@
+<%= form_with model: @listing do |form| %>
+
+    <% if @listing.errors.any? %>
+        <div id="error_explanation">
+        <h2>
+            <%= pluralize(@listing.errors.count, "error") %> prohibited
+            this listing from being saved:
+        </h2>
+        <ul>
+            <% @listing.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+            <% end %>
+        </ul>
+        </div>
+    <% end %>
+
+    <div class="accommodation-type-field">
+        <%= form.label :accommodation_type %> <br/>
+        <%= form.text_field :accommodation_type %>
+    </div>
+
+    <div class="accommodation-name-field">
+        <%= form.label :accommodation_name %> <br/>
+        <%= form.text_field :accommodation_name %>
+    </div>
+
+    <div class="accommodation-location-field">
+        <%= form.label :accommodation_location %> <br/>
+        <%= form.text_field :accommodation_location %>
+    </div>
+
+    <div class="no-of-guests-field">
+        <%= form.label :no_of_guests %> <br/>
+        <%= form.text_field :no_of_guests %>
+    </div>
+
+    <div class="no-of-bedrooms-field">
+        <%= form.label :no_of_bedrooms %> <br/>
+        <%= form.text_field :no_of_bedrooms %>
+    </div>
+
+    <div class="no-of-beds-field">
+        <%= form.label :no_of_beds %> <br/>
+        <%= form.text_field :no_of_beds %>
+    </div>
+
+    <div class="no-of-bathrooms-field">
+        <%= form.label :no_of_bathrooms %> <br/>
+        <%= form.text_field :no_of_bathrooms %>
+    </div>
+
+    <div class="amenities-field">
+        <%= form.label :amenities %> <br/>
+        <%= form.text_field :amenities %>
+    </div>
+
+    <div class="price-per-night-field">
+        <%= form.label :price_per_night %> <br/>
+        <%= form.text_field :price_per_night %>
+    </div>
+
+    <div class="submit-field">
+        <%= form.submit %>
+    </div>
+<% end %>
