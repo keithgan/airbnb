@@ -1,21 +1,74 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <%= javascript_include_tag 'application' %>
+  <%= stylesheet_link_tag "application" %>
+  <%= javascript_include_tag "application" %>
+  <%= stylesheet_link_tag 'https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css'%>
+  <%= javascript_include_tag "https://code.jquery.com/jquery-3.2.1.slim.min.js" %>
+  <%= javascript_include_tag "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" %>
+  <%= javascript_include_tag 'https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js' %>
   <%= csrf_meta_tag %>
 </head>
 <body>
-  <div id="header">
-    <% if signed_in? -%>
-      <%= button_to t(".sign_out"), sign_out_path, method: :delete %>
-      <%= link_to t(".start_hosting"), new_listing_path %>
 
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="/">AirBnB</a>
 
-    <% else -%>
-      <%= link_to t(".sign_in"), sign_in_path %>
-      <%= link_to "Sign in with Google", "/auth/google_oauth2" %>
-    <% end -%>
-  </div>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+        <% if signed_in? -%>
+            <li class="nav-item active">
+              <div class="nav-link">
+                <%= link_to t(".home"), welcome_index_path %>
+              </div>
+            </li>
+            <li class="nav-item">
+              <div class="nav-link">
+                <%= link_to t(".profile"), profile_path(current_user) %>
+              </div>
+            </li>
+            <li class="nav-item">
+              <div class="nav-link">
+                <%= link_to t(".start_hosting"), new_listing_path %>  
+              </div>
+            </li>
+            <li class="nav-item">
+              <div class="nav-link">
+                <%= link_to t(".all_my_listings"), listings_path %>  
+              </div>
+            </li>
+            <li class="nav-item">
+              <div class="nav-link">
+                <%= link_to t(".sign_out"), sign_out_path, method: :delete %>
+              </div>
+            </li>
+        <% else -%>
+            <li class="nav-item">
+              <div class="nav-link">
+                <%= link_to t(".sign_up"), sign_up_path %>  
+              </div>          
+            </li>
+            <li class="nav-item">
+              <div class="nav-link">
+                <%= link_to t(".sign_in"), sign_in_path %>  
+              </div>          
+            </li>    
+            <li>
+              <div class="nav-link">
+                <%= link_to "Sign in with Google", "/auth/google_oauth2" %>
+              </div>          
+            </li>
+        <% end -%>
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
+    </div>
+  </nav>
 
   <div id="flash">
     <% flash.each do |key, value| -%>
