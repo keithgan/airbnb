@@ -1,16 +1,18 @@
-<h1>All my listings.</h1>
-
-<table>
-  <tr>
-    <th> Name </th>
-  </tr>
+<h1>All my listings</h1>
  
-  <% @listings.each do |listing| %>
-    <tr>
-      <td><%= listing.accommodation_name %></td>
-      <td><%= link_to 'Show', listing_path(listing) %></td>
-      <td><%= link_to 'Edit', edit_listing_path(listing) %></td>
-      <td><%= link_to 'Destroy', listing_path(listing), method: :delete, data: { confirm: 'Are you sure?'} %></td>
-    </tr>
-  <% end %>
-</table>
+ <div style = "text-align:center">
+    <% @listings.each do |listing| %>
+        <div class = 'd-inline-block'>
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="..." alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title"><%= listing.accommodation_name %></h5>
+                    <h5 class="card-title"><%= listing.accommodation_type %></h5>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><%= listing.price_per_night %> per night</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    <% end %>
+</div>
