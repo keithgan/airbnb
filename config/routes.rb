@@ -20,6 +20,6 @@ Rails.application.routes.draw do
   get "/sign_up" => "clearance/users#new", as: "sign_up"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-  get "/profile/:id" => "users#profile", as: "profile"
-
+  get "/mylistings" => "listings#my_listings", as: "my_listings"
+  get "/listings/:id/verify" => "listings#verify_listing", as: "verify_listing"
 end

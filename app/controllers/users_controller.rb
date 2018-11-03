@@ -1,12 +1,7 @@
 class UsersController < Clearance::UsersController
 
-    def profile
-      #do somethin
+    def show
       @user = current_user
-      # @listings = @user.listings
-
-      # automatically renders a profile.html.erb
-      
     end
 
     private
@@ -26,6 +21,12 @@ class UsersController < Clearance::UsersController
     end
 
     def user_params
-      params.require(:user).permit(:first_name, :last_name, :email, :password)
+      params.require(:user).permit(
+        :first_name, 
+        :last_name, 
+        :email, 
+        :password, 
+        :avatar
+        )
     end
 end

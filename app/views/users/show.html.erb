@@ -1,0 +1,13 @@
+<h1> <%= "#{@user.first_name}'s Profile Page" %> </h1> 
+
+<p> <%= " Welcome #{@user.first_name}!" %> </p>
+
+<%= form_with model: @user, :html => {:multipart => true} do |form| %>
+    <%= form.file_field :avatar %>
+
+    <div class="submit-field">
+        <%= form.submit %>
+    </div>
+<% end %>
+
+<img src=<%= @user.avatar %>

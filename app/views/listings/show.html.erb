@@ -1,18 +1,68 @@
+<div id="carouselExampleIndicators" class="carousel slide w-50" data-ride="carousel">
+  <ol class="carousel-indicators">
+    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+  </ol>
+  <div class="carousel-inner">
+
+    <% @listing.images.each do |image| %>
+      <% if image == @listing.images[0] %>
+        <div class="carousel-item active">
+          <img class="d-block w-100" src=<%= image.url %>  alt="Second slide">
+        </div>
+      <% else %>
+        <div class="carousel-item">
+          <img class="d-block w-100" src=<%= image.url %>  alt="Second slide">
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+
 <p>
-  <strong>Accommodation type:</strong>
-  <%= @listing.accommodation_type %>
+  <strong>Property type:</strong>
+  <%= @listing.property_type %>
 </p>
  
 <p>
-  <strong>Accommodation name:</strong>
-  <%= @listing.accommodation_name %>
+  <strong>Property name:</strong>
+  <%= @listing.property_name %>
+</p>
+ 
+<p>
+  <strong>Country:</strong>
+  <%= @listing.country %>
 </p>
 
 <p>
-  <strong>Accommodation location:</strong>
-  <%= @listing.accommodation_location %>
+  <strong>State:</strong>
+  <%= @listing.state %>
 </p>
- 
+
+<p>
+  <strong>City:</strong>
+  <%= @listing.city %>
+</p>
+
+<p>
+  <strong>Zipcode:</strong>
+  <%= @listing.zipcode %>
+</p>
+
+<p>
+  <strong> Address:</strong>
+  <%= @listing.address %>
+</p>
+
 <p>
   <strong>Number of guests:</strong>
   <%= @listing.no_of_guests %>
@@ -43,5 +93,14 @@
   <%= @listing.price_per_night %>
 </p>
 
+<% if @listing.verification == true %>
+  <p><i> Listing already verified </i></p>
+<% else %>
+  <% if current_user.superadmin? || current_user.moderator? %>
+  <%= link_to 'Verify listing', verify_listing_path(@listing) %>
+  <% end %>
+<% end %>
+
 <%= link_to 'Edit', edit_listing_path(@listing) %>
 <%= link_to 'Back', listings_path %>
+<%= link_to 'Delete', listing_path(@listing), method: :delete, data: { confirm: 'Are you sure?'} %>

@@ -9,6 +9,9 @@ gem "figaro"
 gem 'omniauth-google-oauth2'
 gem 'omniauth'
 gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
+gem 'kaminari'
+gem 'carrierwave', '~> 1.0'
+gem 'mini_magick'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.1'

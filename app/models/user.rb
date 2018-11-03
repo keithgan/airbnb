@@ -4,6 +4,9 @@ class User < ApplicationRecord
   has_many :authentications, dependent: :destroy
   has_many :listings, dependent: :destroy
 
+  enum status: { customer: 0, moderator: 1, superadmin: 2 }
+  mount_uploader :avatar, AvatarUploader
+
  def self.create_with_auth_and_hash(authentication, auth_hash)
     user = self.create!(
      first_name: auth_hash["info"]["name"].split(" ")[0],
