@@ -1,6 +1,8 @@
 class ListingsController < ApplicationController
+    before_action :verify_action, only: [:verify_listing]
+    
     def index
-        @listings = Listing.all
+        @listings = Listing.all.order("property_name").page params[:page]
     end
 
     def show
@@ -43,8 +45,41 @@ class ListingsController < ApplicationController
         redirect_to listings_path
     end
 
+    def verify_listing
+        @listing = Listing.find(params[:id])
+        @listing.update(verification: true)
+        flash[:notice] = "Property successfully verified."
+        return redirect_to listings_path      
+    end
+
+    def my_listings
+        @my_listings = current_user.listings
+    end
+    
     private
     def listing_params
-        params.require(:listing).permit(:accommodation_type, :accommodation_name, :accommodation_location, :no_of_guests, :no_of_bedrooms, :no_of_beds, :no_of_bathrooms, :amenities, :price_per_night)
+        params.require(:listing).permit(
+            :property_type, 
+            :property_name, 
+            :no_of_guests, 
+            :no_of_bedrooms, 
+            :no_of_beds, 
+            :no_of_bathrooms, 
+            :amenities, 
+            :price_per_night, 
+            :country, 
+            :state, 
+            :city, 
+            :zipcode, 
+            :address, 
+            {images: []}
+        )
+    end
+
+    # If the user is a customer and the listing does not belong to them:
+    def verify_action
+        if current_user.customer?
+            redirect_to root_url
+        end
     end
 end
