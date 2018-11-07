@@ -18,10 +18,16 @@ class ReservationsController < ApplicationController
         @reservation.user_id = current_user.id
         
         if @reservation.save
-            redirect_to braintree_new_path
+            redirect_to braintree_new_path(@reservation)
         else
             render 'listings/show'
         end
+    end
+
+    def destroy    
+        @reservation = Reservation.find_by(params[:reservation_id])
+        @reservation.destroy
+        redirect_to user_path
     end
 
     private

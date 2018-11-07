@@ -1,15 +1,14 @@
 Rails.application.routes.draw do
-  get 'braintree/new'
+  get 'reservation/:reservation_id/braintree/new' => "braintree#new", as: "braintree_new"
   get 'welcome/index'
   root 'welcome#index'
-  post 'braintree/checkout'
 
   get "/auth/:provider/callback" => "sessions#create_from_omniauth"
 
   resources :listings
 
   resources :listings do
-    resource :reservation
+    resources :reservations
   end
 
   resources :passwords, controller: "clearance/passwords", only: [:create, :new]
@@ -28,4 +27,6 @@ Rails.application.routes.draw do
 
   get "/mylistings" => "listings#my_listings", as: "my_listings"
   get "/listings/:id/verify" => "listings#verify_listing", as: "verify_listing"
+
+  post "/reservation/:id/braintree/checkout" => "braintree#checkout", as: "total_price_braintree_checkout" 
 end
