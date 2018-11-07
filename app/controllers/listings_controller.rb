@@ -7,6 +7,7 @@ class ListingsController < ApplicationController
 
     def show
         @listing = Listing.find(params[:id])
+        @reservation = Reservation.new
     end
 
     def new
@@ -41,7 +42,6 @@ class ListingsController < ApplicationController
     def destroy
         @listing = Listing.find(params[:id])
         @listing.destroy
-
         redirect_to listings_path
     end
 

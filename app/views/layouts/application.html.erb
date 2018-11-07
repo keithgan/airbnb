@@ -14,10 +14,7 @@
 </head>
 <body>
 
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+  <nav class="navbar navbar-expand-lg navbar-light bg-white">
     <img class="card-img" style="width: 5rem;"src="/assets/airbnb.jpg" alt="Card image cap">
     <a class="navbar-brand" href="/">AirBnB</a>
 
@@ -27,7 +24,7 @@
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
       </form>
       
-      <ul class="ml-auto navbar-nav mt-2 mt-lg-0">
+      <ul class="ml-auto navbar-nav smt-lg-0">
         <% if signed_in? -%>
             <li class="nav-item active">
               <div class="nav-link">
@@ -59,6 +56,17 @@
                 <%= link_to t(".sign_out"), sign_out_path, method: :delete %>
               </div>
             </li>
+            <li class="nav-item dropdown">
+              <img class="nav-link dropdown-toggle" src=<%= current_user.avatar.url %> style="width: 4rem; border-radius: 5px;"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <div class="dropdown-item" >
+                      <%= link_to t(".profile"), user_path(current_user) %>
+                  </div>
+                  <div class="dropdown-item" >
+                      <%= link_to t(".sign_out"), sign_out_path, method: :delete %>
+                  </div>
+                </div>
+            </li>
         <% else -%>
             <li class="nav-item">
               <div class="nav-link">
@@ -82,7 +90,7 @@
 
   <div id="flash">
     <% flash.each do |key, value| -%>
-      <div id="flash_<%= key %>"><%=h value %></div>
+      <div id="flash_<%= key %>"><%= value %></div>
     <% end %>
   </div>
 
