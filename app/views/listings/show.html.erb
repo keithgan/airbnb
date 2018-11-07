@@ -142,7 +142,7 @@
         </button>
       </div>
       <div class="modal-body">
-          <%= form_with scope: :reservation, url: listing_reservation_path(@listing.id), local: true do |form| %>
+          <%= form_with scope: :reservation, url: listing_reservations_path(@listing.id), local: true do |form| %>
             <div class="form-group row">
               <div class="form-group col-md-6">
                   <%= form.label :check_in %>

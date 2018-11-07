@@ -97,9 +97,11 @@
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item"> RM <%= reservation.total_price %> per night</li>
                         </ul>
-                        <div class="btn btn-danger">
+                        <div class="btn btn-secondary">
                         <%= link_to 'View property', listing_path(reservation.listing) %>
+                        <%= link_to 'Delete', listing_reservation_path(reservation.listing), method: :delete, data: { confirm: 'Are you sure?'} %>
                         </div>
+
                     </div>
                     <div class="card-footer">
                         <% if reservation.listing.verification == true %>
