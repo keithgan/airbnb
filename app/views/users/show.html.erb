@@ -1,13 +1,113 @@
-<h1> <%= "#{@user.first_name}'s Profile Page" %> </h1> 
+<div class="container">
+    <div class="row" >
+        <div class= "col-sm-4">
+            <h1> Profile </h1> 
 
-<p> <%= " Welcome #{@user.first_name}!" %> </p>
+            <div class="card border-dark mb-3" style="width: 20rem;">
+                <img class="card-img-top" src=<%= @user.avatar_url %> alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title"><%= " #{@user.first_name} #{@user.last_name} "%></h5>
+                    <h5 class="card-title">Email: <%= @user.email %></h5>
+                    <h5 class="card-title">Gender: <%= @user.gender %></h5>
+                    <h5 class="card-title">D.O.B: <%= @user.birthday %></h5>
+                    <h5 class="card-title">Phone number: <%= @user.phone_number %></h5>
+                    <h5 class="card-title">Bio: <%= @user.description %></h5>
 
-<%= form_with model: @user, :html => {:multipart => true} do |form| %>
-    <%= form.file_field :avatar %>
+                    <% if @user.id = current_user.id %>
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                            Edit details
+                        </button>
 
-    <div class="submit-field">
-        <%= form.submit %>
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">User Details</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <%= form_with model: @user, :html => {:multipart => true} do |form| %>
+                                        <div class= "form-group row">
+                                            <div class="form-group col-md-6">
+                                                <%= form.label :first_name %>
+                                                <%= form.text_field :first_name, class: 'form-control' %>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <%= form.label :last_name %>
+                                                <%= form.text_field :last_name, class: 'form-control' %>
+                                            </div>
+                                        </div>
+                                        <div class= "form-group row">
+                                            <div class="form-group col-md-5">
+                                                <%= form.label :gender %>
+                                                <%= form.select 'gender', options_for_select(['(select one)', 'Male', 'Female'], '1'), { prompt: true }, required: true, class: 'form-control' %>
+                                            </div>
+                                            <div class="form-group col-md-7">
+                                                <%= form.label :birthday %>
+                                                <%= form.date_field :birthday, class: 'form-control' %>
+                                            </div>
+                                        </div>
+                                        <div class= "form-group row">
+                                            <div class="form-group col-md-5">
+                                                <%= form.label :phone_number %>
+                                                <%= form.text_field :phone_number, class: 'form-control' %>
+                                            </div>
+                                        </div>
+                                        <div class= "form-group row">
+                                            <div class="form-group col-md-12">
+                                                <%= form.label :description %>
+                                                <%= form.text_area :description, class: 'form-control' %>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-3"> 
+                                                <%= form.label :profile_pic %>
+                                                <%= form.file_field :avatar %>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-primary">Save changes</button>
+                                        </div>
+                                    <% end %>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+
+    <div class= "col-sm-8">
+        <h1> Reservations </h1>
+
+        <% @reservations.each do |reservation| %>
+            <div class = "d-inline-block">
+                <div class="card border-dark mb-4 mr-2" style="width: 18rem; text-align:center;">
+                    <img class="card-img-top" src=<%= reservation.listing.images.first.to_s %> alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title"><%= reservation.listing.property_name %></h5>
+                        <h5 class="card-title"><%= reservation.listing.property_type %></h5>
+                        <h6 class="card-subtitle mb-2 text-muted"><%= reservation.check_in %> - <%= reservation.check_out %> </h6>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"> RM <%= reservation.total_price %> per night</li>
+                        </ul>
+                        <div class="btn btn-danger">
+                        <%= link_to 'View property', listing_path(reservation.listing) %>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <% if reservation.listing.verification == true %>
+                            <img class="card-img" style="width: 1.5rem;"src="/assets/verify-icon.png" alt="Card image cap">
+                        <% end %>
+                    </div>
+                </div>
+            </div>
+        <% end %>
     </div>
-<% end %>
-
-<img src=<%= @user.avatar %>
+</div>

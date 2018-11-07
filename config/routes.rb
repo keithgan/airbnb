@@ -1,10 +1,16 @@
 Rails.application.routes.draw do
+  get 'braintree/new'
   get 'welcome/index'
   root 'welcome#index'
+  post 'braintree/checkout'
 
   get "/auth/:provider/callback" => "sessions#create_from_omniauth"
 
   resources :listings
+
+  resources :listings do
+    resource :reservation
+  end
 
   resources :passwords, controller: "clearance/passwords", only: [:create, :new]
   resource :session, controller: "clearance/sessions", only: [:create]

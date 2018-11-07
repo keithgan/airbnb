@@ -1,5 +1,5 @@
 
-<%= form_with model: @listing, :html => {:multipart => true} do |form| %>
+<%= form_with model: @listing, :html => {:multipart => true}, local: true do |form| %>
 
     <% if @listing.errors.any? %>
         <div id="error_explanation">
@@ -15,26 +15,10 @@
         </div>
     <% end %>
     
-    <div class="form-row">
+    <div class="form-group row">
         <div class="form-group col-md-6">
             <%= form.label :property_type %>
-            <select id="inputState" class="form-control">
-                <option selected>Choose...</option>
-                <option>House</option>
-                <option>Entire Floor</option>
-                <option>Condominium</option>
-                <option>Villa</option>
-                <option>Townhouse</option>
-                <option>Castle</option>
-                <option>Treehouse</option>
-                <option>Igloo</option>
-                <option>Yurt</option>
-                <option>Cave</option>
-                <option>Chalet</option>
-                <option>Hut</option>
-                <option>Tent</option>
-                <option>Other</option>                
-            </select>
+            <%= form.text_field :property_type, class: 'form-control' %>
         </div>
         <div class="form-group col-md-6">
             <%= form.label :property_name %>
@@ -42,7 +26,7 @@
         </div>
     </div>
     
-    <div class="form-row">
+    <div class="form-group row">
         <div class="form-group col-md-3">
             <%= form.label :country %>
             <%= form.text_field :country, class: 'form-control' %>
@@ -68,7 +52,7 @@
         </div>
     </div>
 
-    <div class="form-row">
+    <div class="form-group row">
         <div class="form-group col-md-3">
             <%= form.label :no_of_guests %>
             <%= form.text_field :no_of_guests, class: 'form-control' %>
@@ -89,28 +73,28 @@
 
     <div class="form-group row">
         <div class="form-group col-md-12">
-            <%= form.label :amenities %> <br/>
+            <%= form.label :amenities %>
             <%= form.text_area :amenities, class: 'form-control' %>
         </div>
     </div>
 
-    <div class="price-per-night-field">
-        <%= form.label :price_per_night %> <br/>
-        <%= form.text_field :price_per_night %>
+    <div class="form-group row">
+        <div class="form-group col-md-3"> 
+            <%= form.label :price_per_night %> 
+            <%= form.text_field :price_per_night, class: 'form-control' %>
+        </div>
     </div>
 
-    <br/>
-
-    <div class="image-field">
-    <%= form.file_field :images, multiple: true %>
+    <div class="form-group row">
+        <div class="form-group col-md-3"> 
+            <%= form.label :Gallery %> 
+            <%= form.file_field :images, multiple: true %>
+        </div>
     </div>
-
-    <br/>
     
-    <div class="submit-field">
-        <%= form.submit %>
+    <div class="form-group row">
+        <div class="form-group col-md-3"> 
+            <%= form.submit %>
+        </div>
     </div>
-
-    <br/>
-
 <% end %>
