@@ -95,7 +95,7 @@
                         <h5 class="card-title"><%= reservation.listing.property_type %></h5>
                         <h6 class="card-subtitle mb-2 text-muted"><%= reservation.check_in %> - <%= reservation.check_out %> </h6>
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item"> RM <%= reservation.total_price %> per night</li>
+                            <li class="list-group-item"> RM <%= reservation.total_price %> </li>
                         </ul>
                         <div class="btn btn-secondary">
                         <%= link_to 'View property', listing_path(reservation.listing) %>
