@@ -19,10 +19,10 @@
     <a class="navbar-brand" href="/">AirBnB</a>
 
     <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-      </form>
+        <%= form_with scope: @listing, url:listings_path, method: :get, class:'form-inline my-2 my-lg-0' , local: true do |form| %>
+          <%= form.text_field :omnisearch, class: "form-control mr-sm-2" %>
+          <%= form.submit "search", class:"btn btn-outline-success my-2 my-sm-0" %>
+        <% end %>
       
       <ul class="ml-auto navbar-nav smt-lg-0">
         <% if signed_in? -%>

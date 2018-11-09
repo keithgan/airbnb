@@ -3,8 +3,18 @@ class ListingsController < ApplicationController
     
     def index
         @listings = Listing.all.order("property_name").page params[:page]
-    end
+        
+        
+        @listings = Listing.where(nil)
+        filtering_params(params).each do |key, value|
+            @listings = @listings.public_send(key, value) if value.present?                       
+            #  this is what the above line does
+            #   @listings.key(value)
+            #   eg. @listing.search(malaysia)
+        end
 
+    end
+    
     def show
         @listing = Listing.find(params[:id])
         @reservation = Reservation.new
@@ -81,5 +91,10 @@ class ListingsController < ApplicationController
         if current_user.customer?
             redirect_to root_url
         end
+    end
+
+    # A list of the param names that can be used for filtering the Product list
+    def filtering_params(params)
+        params.slice(:omnisearch)
     end
 end
