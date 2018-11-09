@@ -17,7 +17,8 @@ class BraintreeController < ApplicationController
      )
   
     if result.success?
-      ReservationMailer.confirmation_email(current_user, @reservation.listing.user).deliver_now
+      ReservationJob.perform_now(current_user, @reservation.listing.user)
+      # ReservationMailer.confirmation_email(current_user, @reservation.listing.user).deliver_now
       redirect_to user_path(current_user), :flash => { :success => "Transaction successful!" }
     else
       redirect_to user_path(current_user), :flash => { :error => "Transaction failed. Please try again." }
