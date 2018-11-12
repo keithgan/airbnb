@@ -10,7 +10,12 @@ class ListingsController < ApplicationController
             @listings = @listings.public_send(key, value) if value.present?                       
             #  this is what the above line does
             #   @listings.key(value)
-            #   eg. @listing.search(malaysia)
+            #   eg. @listing.omisearch(malaysia)
+        end
+
+        respond_to do |format|
+            format.html
+            format.js
         end
     end
     
@@ -62,7 +67,7 @@ class ListingsController < ApplicationController
     end
 
     def my_listings
-        @my_listings = current_user.listings
+        @listings = current_user.listings
     end
     
     private
