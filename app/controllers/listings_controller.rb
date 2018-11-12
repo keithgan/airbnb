@@ -12,7 +12,6 @@ class ListingsController < ApplicationController
             #   @listings.key(value)
             #   eg. @listing.search(malaysia)
         end
-
     end
     
     def show
